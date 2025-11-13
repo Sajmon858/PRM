@@ -100,46 +100,46 @@
 </head>
 <body>
 <div class="container">
-    <h1>Terminal Medyczno-Policyjny</h1>
+    <h1>Terminal Medyczny</h1>
 
     <div class="tab-buttons">
         <button class="tab-btn active" onclick="showTab('akt', event)">Karta Aktu Zgonu</button>
         <button class="tab-btn" onclick="showTab('sekcja', event)">Sekcja Zwłok</button>
         <button class="tab-btn" onclick="showTab('psych', event)">Badanie Psychologiczne</button>
-        <button class="tab-btn" onclick="showTab('raport', event)">Raport</button>
+        <button class="tab-btn" onclick="showTab('raport', event)">Raport Oddział</button>
     </div>
 
     <!-- AKT ZGONU -->
     <div id="akt" class="tab active">
         <form id="aktForm">
-            <label>Imię i nazwisko:</label>
+            <label>**Imię i nazwisko:**</label>
             <input type="text" id="aktImie" placeholder="np. Jan Kowalski" required>
 
-            <label>Data urodzenia:</label>
+            <label>**Data urodzenia:**</label>
             <input type="date" id="aktDataUrodzenia" required>
 
-            <label>PESEL / ID:</label>
+            <label>**PESEL / ID:**</label>
             <input type="text" id="aktPESEL" required>
 
-            <label>Płeć:</label>
+            <label>**Płeć:**</label>
             <select id="aktPlec" required>
                 <option value="" disabled selected>Wybierz</option>
                 <option>M</option>
                 <option>K</option>
             </select>
 
-            <label>Adres zamieszkania:</label>
+            <label>**Adres zamieszkania:**</label>
             <input type="text" id="aktAdres">
 
-            <label>Data zgonu:</label>
+            <label>**Data zgonu:**</label>
             <input type="date" id="aktDataZgonu">
 
-            <label>Godzina zgonu:</label>
+            <label>**Godzina zgonu:**</label>
             <input type="time" id="aktGodzinaZgonu">
 
-            <label>Miejsce zgonu:</label>
+            <label>**Miejsce zgonu:**</label>
             <select id="aktMiejsce">
-                <option value="" disabled selected>Wybierz</option>
+                <option value="" disabled selected>**Wybierz**</option>
                 <option>Szpital</option>
                 <option>Dom</option>
                 <option>Miejsce publiczne</option>
@@ -147,7 +147,7 @@
             </select>
             <input type="text" id="aktMiejsceInne" placeholder="Jeśli 'Inne', wpisz miejsce" style="margin-top:8px; display:none;">
 
-            <label>Czy wymagane zawiadomienie prokuratury?</label>
+            <label>**Czy wymagane zawiadomienie prokuratury?**</label>
             <select id="aktProkuratura">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Tak</option>
@@ -162,66 +162,66 @@
     <!-- SEKCJA ZWŁOK -->
     <div id="sekcja" class="tab">
         <form id="sekcjaForm">
-            <label>Sygnatura sprawy:</label>
+            <label>**Sygnatura sprawy:**</label>
             <input type="text" id="sekSygnatura">
 
-            <label>Data sekcji:</label>
+            <label>**Data sekcji:**</label>
             <input type="date" id="sekData">
 
-            <label>Godzina rozpoczęcia:</label>
+            <label>**Godzina rozpoczęcia:**</label>
             <input type="time" id="sekStart">
 
-            <label>Godzina zakończenia:</label>
+            <label>**Godzina zakończenia:**</label>
             <input type="time" id="sekEnd">
 
-            <label>Miejsce sekcji:</label>
+            <label>**Miejsce sekcji:**</label>
             <input type="text" id="sekMiejsce">
 
-            <label>Patomorfolog:</label>
+            <label>**Patomorfolog:**</label>
             <input type="text" id="sekPatomorfolog">
 
-            <label>Asystent:</label>
+            <label>**Asystent:**</label>
             <input type="text" id="sekAsystent">
 
-            <label>Imię i nazwisko zmarłego:</label>
+            <label>**Imię i nazwisko zmarłego:**</label>
             <input type="text" id="sekImie">
 
-            <label>Wiek:</label>
+            <label>**Wiek:**</label>
             <input type="number" id="sekWiek">
 
-            <label>Płeć:</label>
+            <label>**Płeć:**</label>
             <select id="sekPlec">
                 <option value="" disabled selected>Wybierz</option>
                 <option>M</option>
                 <option>K</option>
             </select>
 
-            <label>Data zgonu:</label>
+            <label>**Data zgonu:**</label>
             <input type="date" id="sekDataZgonu">
 
-            <label>Miejsce zgonu:</label>
+            <label>**Miejsce zgonu:**</label>
             <input type="text" id="sekMiejsceZgonu">
 
-            <label>Opis zewnętrzny:</label>
+            <label>**Opis zewnętrzny:**</label>
             <textarea id="sekOpisZew"></textarea>
 
-            <label>Opis wewnętrzny:</label>
+            <label>**Opis wewnętrzny:**</label>
             <textarea id="sekOpisWe"></textarea>
 
-            <label>Badania dodatkowe:</label>
+            <label>**Badania dodatkowe:**</label>
             <textarea id="sekBadania"></textarea>
 
-            <label>Wnioski końcowe:</label>
+            <label>**Wnioski końcowe:**</label>
             <textarea id="sekWnioski"></textarea>
 
-            <label>Charakter zgonu:</label>
+            <label>**Charakter zgonu:**</label>
             <select id="sekCharakter">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Naturalny</option>
                 <option>Nienaturalny</option>
             </select>
 
-            <label>Czy wskazane dalsze postępowanie prokuratorskie?</label>
+            <label>**Czy wskazane dalsze postępowanie prokuratorskie?**</label>
             <select id="sekProkuratura">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Tak</option>
@@ -236,28 +236,28 @@
     <!-- BADANIE PSYCHOLOGICZNE -->
     <div id="psych" class="tab">
         <form id="psychForm">
-            <label>Imię i nazwisko:</label>
+            <label>**Imię i nazwisko:**</label>
             <input type="text" id="psychImie">
 
-            <label>Data urodzenia:</label>
+            <label>**Data urodzenia:**</label>
             <input type="date" id="psychDataUrodzenia">
 
-            <label>Miejsce zamieszkania:</label>
+            <label>**Miejsce zamieszkania:**</label>
             <input type="text" id="psychAdres">
 
-            <label>Stanowisko / jednostka:</label>
+            <label>**Stanowisko / jednostka:**</label>
             <input type="text" id="psychStanowisko">
 
-            <label>Data badania:</label>
+            <label>**Data badania:**</label>
             <input type="date" id="psychDataBadania">
 
-            <label>Miejsce badania:</label>
+            <label>**Miejsce badania:**</label>
             <input type="text" id="psychMiejsceBadania">
 
-            <label>Psycholog prowadzący:</label>
+            <label>**Psycholog prowadzący:**</label>
             <input type="text" id="psychOsoba">
 
-            <label>Ocena odporności na stres:</label>
+            <label>**Ocena odporności na stres:**</label>
             <select id="psychStres">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Niska</option>
@@ -265,7 +265,7 @@
                 <option>Wysoka</option>
             </select>
 
-            <label>Stabilność emocjonalna:</label>
+            <label>**Stabilność emocjonalna:**</label>
             <select id="psychStabilnosc">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Niska</option>
@@ -273,14 +273,14 @@
                 <option>Wysoka</option>
             </select>
 
-            <label>Impulsywność:</label>
+            <label>**Impulsywność:**</label>
             <select id="psychImpuls">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Tak</option>
                 <option>Nie</option>
             </select>
 
-            <label>Poziom empatii:</label>
+            <label>**Poziom empatii:**</label>
             <select id="psychEmpatia">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Niski</option>
@@ -288,7 +288,7 @@
                 <option>Wysoki</option>
             </select>
 
-            <label>Wnioski końcowe:</label>
+            <label>**Wnioski końcowe:**</label>
             <select id="psychWnioski">
                 <option value="" disabled selected>Wybierz</option>
                 <option>Brak przeciwwskazań</option>
@@ -303,40 +303,40 @@
     <!-- RAPORT -->
     <div id="raport" class="tab">
         <form id="raportForm">
-            <label>Szpital:</label>
+            <label>**Szpital:**</label>
             <input type="text" id="rapSzpital">
 
-            <label>Oddział:</label>
+            <label>**Oddział:**</label>
             <input type="text" id="rapOddzial">
 
-            <label>Data sporządzenia:</label>
+            <label>**Data sporządzenia:**</label>
             <input type="date" id="rapData">
 
-            <label>Godzina:</label>
+            <label>**Godzina:**</label>
             <input type="time" id="rapGodzina">
 
-            <label>Sporządził:</label>
+            <label>**Sporządził:**</label>
             <input type="text" id="rapOsoba">
 
-            <label>Dane pacjenta (Imię, Wiek, Płeć, PESEL, Adres):</label>
+            <label>**Dane pacjenta (Imię, Wiek, Płeć, PESEL, Adres):**</label>
             <textarea id="rapPacjent"></textarea>
 
-            <label>Powód przyjęcia:</label>
+            <label>**Powód przyjęcia:**</label>
             <textarea id="rapPowod"></textarea>
 
-            <label>Stan pacjenta przy przyjęciu:</label>
+            <label>**Stan pacjenta przy przyjęciu:**</label>
             <textarea id="rapStan"></textarea>
 
-            <label>Przebieg leczenia:</label>
+            <label>**Przebieg leczenia:**</label>
             <textarea id="rapPrzebieg"></textarea>
 
-            <label>Wyniki badań:</label>
+            <label>**Wyniki badań:**</label>
             <textarea id="rapWyniki"></textarea>
 
-            <label>Rozpoznanie końcowe:</label>
+            <label>**Rozpoznanie końcowe:**</label>
             <textarea id="rapRozpoznanie"></textarea>
 
-            <label>Zalecenia / dalsze postępowanie:</label>
+            <label>**Zalecenia / dalsze postępowanie:**</label>
             <textarea id="rapZalecenia"></textarea>
 
             <button type="submit">Wyślij Raport</button>
