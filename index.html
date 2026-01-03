@@ -1,0 +1,205 @@
+                <option>Średnia</option>
+                <option>Wysoka</option>
+            </wybierz>
+
+            <label>**Stabilność wyposażenia:**</label>
+            <select id="psychStabilnosc">
+                <option value="" wyłączone wybrane>Wybierz</option>
+                <option>Niska</option>
+                <option>Średnia</option>
+                <option>Wysoka</option>
+            </wybierz>
+
+            <label>**Impulsywność:**</label>
+            <select id="psychImpuls">
+                <option value="" wyłączone wybrane>Wybierz</option>
+                <option>Tak</option>
+                <option>Nie</option>
+            </wybierz>
+
+            <label>**Poziom empatii:**</label>
+            <select id="psychEmpatia">
+                <option value="" wyłączone wybrane>Wybierz</option>
+                <option>Niski</option>
+                <option>Średni</option>
+                <option>Wysoki</option>
+            </wybierz>
+
+            <label>**Wnioski koncowe:**</label>
+            <select id="psychWnioski">
+                <option value="" wyłączone wybrane>Wybierz</option>
+                <option>Brak przeciwwskazań</option>
+                <option>Istniej przeciwwskazania</option>
+            </wybierz>
+
+            <button type="submit">Wydział Badania Psychologiczne</button>
+        </formularz>
+        <div id="statusPsych"></div>
+    </div>
+<!-- POTWIERDZENIE BADAŃ LEKARSKICH -->
+<div id="potwierdzenie" class="tab">
+<form id="potwierdzenieForm">
+<label>**Rodzaj badania:**</label>
+<div style="display:flex; gap:10px; margin-bottom:10px;">
+<label><input type="checkbox" id="badaniePsych">Psychologiczne</label>
+<label><input type="checkbox" id="badanieLek">Lekarskie</label>
+<label><input type="checkbox" id="badaniePraca"> Medycyna pracy</label>
+</div>
+<label>**Imię i nazwisko osoby badanej:**</label>
+<input type="text" id="potwierdzenieImie" wymagane>
+<label>**Imię i nazwisko lekarza potwierdzającego:**</label>
+<input type="text" id="potwierdzenieLekarza" wymagane>
+<button type="submit">Wyświetl Potwierdzenie Badania</button>
+</formularz>
+<div id="statusPotwierdzenie"></div>
+</div>
+    <!-- RAPORT -->
+    <div id="raport" class="tab">
+        <formularz id="raportForm">
+            <label>**Szpital:**</label>
+            <input type="text" id="rapSzpital">
+
+            <label>**Oddział:**</label>
+            <input type="text" id="rapOddzial">
+
+            <label>**Dane sporządzenia:**</label>
+            <input type="date" id="rapData">
+
+            <label>**Godzina:**</label>
+            <input type="time" id="rapGodzina">
+
+            <label>**Sporzędzi:**</label>
+            <input type="text" id="rapOsoba">
+
+            <label>**Dane pacjenta (Imię, Wiek, Płeć, PESEL, Adres):**</label>
+            <textarea id="rapPacjent"></textarea>
+
+            <label>**Powód przyjęci:**</label>
+            <textarea id="rapPowod"></textarea>
+
+            <label>**Stan pacjenta przy przyjęciu:**</label>
+            <textarea id="rapStan"></textarea>
+
+            <label>**Przebieg leczenia:**</label>
+            <textarea id="rapPrzebieg"></textarea>
+
+            <label>**Wyniki badań:**</label>
+            <textarea id="rapWyniki"></textarea>
+
+            <label>**Rozpoznanie koncowe:**</label>
+            <textarea id="rapRozpoznanie"></textarea>
+
+            <label>**Zalecenia / wyjaśnienie postępowanie:**</label>
+            <textarea id="rapZalecenia"></textarea>
+
+            <button type="submit">Wyślij Raport</button>
+        </formularz>
+        <div id="Raportstatusu"></div>
+    </div>
+</div>
+<skrypt>
+// --- Zakładki ---
+funkcja showTab(id, zdarzenie){const tabs=document.querySelectorAll('.tab'); const tabBtns=document.querySelectorAll('.tab-btn'); tabs.forEach(t=>t.classList.remove('aktywne')); tabBtns.forEach(b=>b.classList.remove('aktywne')); document.getElementById(id).classList.add('aktywne'); if(zdarzenie && zdarzenie.currentTarget) zdarzenie.currentTarget.classList.add('aktywne');}
+document.getElementById('aktMiejsce')?.addEventListener('change',function(){document.getElementById('aktMiejsceInne').style.display=this.value==='Inne'?'block':'none';});
+funkcja asynchroniczna sendWebhook(url,content){try{const res=await fetch(url,{metoda:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});if(!res.ok)throw new Error(res.statusText);return true;}catch(e){console.error(e); return false;}}
+funkcja asynchroniczna sendWebhookEmbed(url,embed){try{const res=await fetch(url,{metoda:'POST',nagłówki:{'Content-Type':'application/json'},ciało:JSON.stringify({embeds:[embed]})});if(!res.ok)throw new Error(res.statusText);return true;}catch(e){console.error(e); return false;}}
+funkcja setStatus(id,message,success){const el=document.getElementById(id); el.textContent=message; el.classList.remove('status-success','status-error'); if(success===true) el.classList.add('status-success'); if(success===false) el.classList.add('status-error');}
+    // -------------------------
+    // FORMUŁARZE
+    // -------------------------
+
+    // KARTA ZGONU
+    document.getElementById('aktForm').addEventListener('submit', async e=>{
+        e.preventDefault();
+        setStatus('statusAkt','Wysłam...',null);
+        const content = `âš°ď¸ KARTA AKTU ZGONU âš°ď¸ \n\nImię i nazwisko: ${document.getElementById('aktImie').value}\nData urodzenia: ${document.getElementById('aktDataUrodzenia').value}\nPESEL/ID: ${document.getElementById('aktPESEL').value}\nPłeć: ${document.getElementById('aktPlec').value}\nAdres: ${document.getElementById('aktAdres').value}\nDane zgonu: ${document.getElementById('aktDataZgonu').value}\nGodzina: ${document.getElementById('aktGodzinaZgonu').value}\nMiejsce zgonu: ${document.getElementById('aktMiejsce').value==='Inne'?document.getElementById('aktMiejsceInne').value:document.getElementById('aktMiejsce').value}\nWymagane powiadomienia prokuratury: ${document.getElementById('aktProkuratura').value}`;
+        stałe adresy URL = [
+            "https://discord.com/api/webhooks/1436293503570284686/yd0vuqDO5rwHc7tV3KlL9ta7Ym5L3Knl7uH1aAGWR229xQ-C1DSZvR2hPdsoAt40LsZu",
+            "https://discord.com/api/webhooks/1436320122569625683/mru2WuvLwBqsZriP9DCWDozxzARwtCksebJtg5z357LI6Q4k4UyH8_p21SN3zEfUvEGf"
+        ];
+        niech success=true;
+        dla(const u z adresów URL){ if(!await sendWebhook(u,content)) powodzenie=false;}
+        setStatus('statusAkt', sukces?'Wysłano pomyślnie!':'Błąd wysyłania', sukces);
+        e.target.reset();
+        document.getElementById('aktMiejsceInne').style.display='none';
+    });
+
+    // SEKCJA ZWŁ OK
+    document.getElementById('sekcjaForm').addEventListener('submit', async e=>{
+        e.preventDefault();
+        setStatus('statusSekcja','Wysłam...',null);
+        konst pola=['Sygnatura','Dane','Start','Koniec','Miejsce','Patomorfolog','Asystent','Imie','Wiek','Plec','DataZgonu','MiejsceZgonu','OpisZew','OpisWe','Badania','Wnioski','Charakter','Prokuratura'];
+        niech content = "SEKCJA ZWŁO OK – RAPORT PATOLOGICZNY\n";
+        dla(const f pól) zawartość += `${f}: ${document.getElementById('sek'+f).value}\n`;
+        stałe adresy URL = [
+            "https://discord.com/api/webhooks/1436306582064332801/PQFVgvHbL0IXcnssn3n83cjvKSZb9FazHwBuD2w8vCHUGrpZoxWpNcT0bU_-yK5L5qTG",
+            "https://discord.com/api/webhooks/1436320612078452756/nc02wMUyalWlPaHL30ZodCM60XerNo0GFpQ03gcUJO5-2zNb-ppDKSETFc5v5otkEaMW"
+        ];
+        niech success=true;
+        dla(const u z adresów URL){ if(!await sendWebhook(u,content)) powodzenie=false;}
+        setStatus('statusSekcja', sukces?'Wysłano pomyślnie!':'Błąd wysyłania', sukces);
+        e.target.reset();
+    });
+
+    // BADANIE PSYCHOLOGICZNE
+    document.getElementById('psychForm').addEventListener('submit', async e=>{
+        e.preventDefault();
+        setStatus('statusPsych','Wysłam...',null);
+        const Fields=['Imie','DataUrodzenia','Adres','Stanowisko','DataBadania','MiejsceBadania','Osoba','Stres','Stabilnosc','Impuls','Empatia','Wnioski'];
+        niech content="BADANIE PSYCHOLOGICZNE KANDYDATA DO SŁUŻBY\n";
+        dla(const f pól) zawartość += `${f}: ${document.getElementById('psych'+f).value}\n`;
+        stałe adresy URL=[
+            "https://discord.com/api/webhooks/1436306790651531266/uvY5QOLl6j9s1760oPRna1e8FWLIJd8TBFpcDdZpfNoAFyS0sIx2RsAP-873zJpywZr-",
+            "https://discord.com/api/webhooks/1436320457543520386/h-veeXBnF7eup7ncLULPO1kBi6uEkNnhnXjqA6FluOGdwz-EjkafGmGfUR1aGy5_lV8F"
+        ];
+        niech success=true;
+        dla(const u z adresów URL){ if(!await sendWebhook(u,content)) powodzenie=false;}
+        setStatus('statusPsych', sukces?'Wysłano pomyślnie!':'Błąd wysyłania', sukces);
+        e.target.reset();
+    });
+
+    // RAPORT
+    document.getElementById('raportForm').addEventListener('submit', async e=>{
+        e.preventDefault();
+        setStatus('statusRaport','Wysłam...',null);
+        const Fields=['Szpital','Oddział','Dane','Godzina','Osoba','Pacjent','Powod','Stan','Przebieg','Wyniki','Rozpoznanie','Zalecenia'];
+        niech content="RAPORT SZPITALNY\n";
+        dla(const f pól) zawartość += `${f}: ${document.getElementById('rap'+f).value}\n`;
+        stałe adresy URL=[
+            "https://discord.com/api/webhooks/1436306969659969647/Qkg3tnrr3uurcfOTwUNDnQF6JMyaR0FOvhw-YY0dod7Uc-YnZXbeyLuc-rudEIg_Inlg"
+        ];
+        niech success=true;
+        dla(const u z adresów URL){ if(!await sendWebhook(u,content)) powodzenie=false;}
+        setStatus('statusRaport', sukces?'Wysłano pomyślnie!':'Błąd wysyłania', sukces);
+        e.target.reset();
+    });
+// --- POTWIERDZENIE BADAŃ LEKARSKICH ---
+document.getElementById('potwierdzenieForm').addEventListener('submit', async e=>{
+e.preventDefault();
+setStatus('statusPotwierdzenie','Wysłam...',null);
+
+niech rodzaje = [];
+if(document.getElementById('badaniePsych').checked) pojedyncze.push("Psychologiczne");
+if(document.getElementById('badanieLek').checked) pojedyncze.push("Lekarskie");
+if(document.getElementById('badaniePraca').checked) pojedyncze.push("Medycyna pracy");
+
+const embedLek = {
+tytuł: „âś… Potwierdzenie badania lekarskiego”,
+kolor: 0x2ecc71,
+pola:[
+{name:"đŸ'¤ Osoba badana", wartość:document.getElementById('potwierdzenieImie').value || "Brak danych", inline:false},
+{name:"đŸŠş Potwierdziło", wartość:document.getElementById('potwierdzenieLekarz').value || "Brak danych", inline:false},
+{name:"đŸ“‹ Rodzaj badania", wartość:rodzaje.length ? osobista.join(", "): "Brak zaznaczenia", inline:false}
+],
+footer:{text:"Uniwersyteckie Centrum Kliniczne w Gdańsku - Letnie RP"},
+znacznik czasu:nowa data().toISOString()
+};
+
+oczekuj na wysłanieWebhookEmbed("https://discord.com/api/webhooks/1457146644868108496/ix9Xqa8mwfU5oB7Tsye_Q4D22BBMHD9E_yyTRMRm3A0GDB0AyCIIJ4_7UaMec2CEvsG9", embedLek);
+
+setStatus('statusPotwierdzenie','Wysłano pomyślnie!',true);
+e.target.reset();
+});
+</script>
+</ciało>
+</html>
